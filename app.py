@@ -4,7 +4,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load dataset
-data = pd.read_csv("models/medical_qa.csv")
+import os
+
+file_path = os.path.join("models", "medical_qa.csv")
+
+data = pd.read_csv(file_path)
 
 data = data.dropna()
 
