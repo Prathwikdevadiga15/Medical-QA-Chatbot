@@ -1,21 +1,48 @@
-## Sentiment Analysis Integration
+# AI Medical & Research Assistant
 
-The chatbot can analyze the emotional tone of user queries and provide appropriate responses.
+## Features
 
-### Features:
-- Detects Positive, Negative, and Neutral sentiments.
-- Provides empathetic responses for negative emotions.
-- Uses TextBlob-based sentiment analysis.
+✔ Medical Question Answering  
+✔ TF-IDF Retrieval  
+✔ Cosine Similarity  
+✔ Medical Entity Recognition  
+✔ Sentiment Analysis  
+✔ Dynamic Knowledge Base Update  
+✔ Research Paper Assistant  
+✔ Image Upload Assistant  
+✔ Multilingual Support  
 
-### Example:
+## Technologies Used
 
-User Input:
-"I am scared because I have chest pain."
+- Python
+- Streamlit
+- Pandas
+- Scikit-learn
+- spaCy
+- TextBlob
+- Deep Translator
 
-Output:
+## How to Run
 
-Sentiment:
-Negative 😟
+Install dependencies:
 
-Response:
-"I'm sorry you are feeling this way. I will try my best to help you."
+pip install -r requirements.txt
+
+Run:
+
+streamlit run app.py
+
+
+## Internship Tasks Completed
+
+Task 1: Medical Entity Recognition
+
+Task 2: Dynamic Knowledge Base
+
+Task 3: Sentiment Analysis
+
+Task 4: Domain Expert Chatbot
+
+Task 5: Multimodal Assistant
+
+Task 6: Multilingual Chatbot

@@ -1,0 +1,5 @@
+Title,Category,Abstract
+Attention Is All You Need,Artificial Intelligence,"This paper introduces the Transformer model which improves natural language processing using attention mechanisms."
+BERT Pre-training of Deep Bidirectional Transformers,Natural Language Processing,"BERT is a transformer-based model that helps computers understand language by learning context from text."
+Deep Residual Learning for Image Recognition,Computer Vision,"This paper introduces ResNet, a deep learning architecture used for image classification."
+Generative Adversarial Networks,Machine Learning,"GANs are neural networks that generate new data samples using two competing networks."
