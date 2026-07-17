@@ -1,43 +1,21 @@
-# Medical Q&A Chatbot
+## Sentiment Analysis Integration
 
-## Project Description
-The Medical Q&A Chatbot is an AI-based application that answers medical questions using the MedQuAD dataset. It uses Natural Language Processing (NLP) and TF-IDF similarity to retrieve the most relevant answer.
+The chatbot can analyze the emotional tone of user queries and provide appropriate responses.
 
-## Features
-- Medical Question Answering
-- MedQuAD Dataset
-- TF-IDF Similarity Search
-- Streamlit Web Interface
-- User-Friendly Interface
+### Features:
+- Detects Positive, Negative, and Neutral sentiments.
+- Provides empathetic responses for negative emotions.
+- Uses TextBlob-based sentiment analysis.
 
-## Technologies Used
-- Python
-- Pandas
-- Scikit-learn
-- Streamlit
-- XML Parsing
+### Example:
 
-## Project Structure
+User Input:
+"I am scared because I have chest pain."
 
-Medical-QA-Chatbot/
-│
-├── app/
-├── dataset/
-├── models/
-├── notebook/
-├── report/
-├── images/
-├── app.py
-├── chatbot.py
-├── train_model.py
-├── requirements.txt
-├── README.md
-└── .gitignore
+Output:
 
-## Run
+Sentiment:
+Negative 😟
 
-python train_model.py
-
-python chatbot.py
-
-python -m streamlit run app.py
+Response:
+"I'm sorry you are feeling this way. I will try my best to help you."
