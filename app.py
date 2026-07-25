@@ -1,35 +1,31 @@
 import streamlit as st
 
-from chatbot import get_answer
+from dynamic_chatbot import get_dynamic_answer
 from entity_recognition import recognize_entities
 from sentiment import analyze_sentiment
 from research_chatbot import search_paper
 from image_analyzer import analyze_image
-from translator import translate_text
 
 
-# -----------------------------
-# Page Configuration
-# -----------------------------
+# =====================================================
+# PAGE CONFIGURATION
+# =====================================================
+
 st.set_page_config(
-    page_title="AI Medical & Research Assistant",
-    page_icon="🤖",
-    layout="centered"
+    page_title="Medical AI Assistant",
+    page_icon="🩺",
+    layout="wide"
 )
 
 
-st.title("🤖 AI Medical & Research Assistant")
+# =====================================================
+# SIDEBAR
+# =====================================================
 
-st.write(
-    "Medical Q&A | Research Assistant | Multimodal AI | Multilingual Support"
-)
+st.sidebar.title("🤖 AI Assistants")
 
-
-# -----------------------------
-# Sidebar
-# -----------------------------
-assistant = st.sidebar.selectbox(
-    "Choose Assistant",
+assistant_mode = st.sidebar.selectbox(
+    "Choose an assistant:",
     [
         "🩺 Medical Assistant",
         "📚 Research Assistant",
@@ -38,282 +34,204 @@ assistant = st.sidebar.selectbox(
 )
 
 
-language = st.sidebar.selectbox(
-    "🌍 Select Language",
-    [
-        "English",
-        "Hindi",
-        "Kannada",
-        "Tamil"
-    ]
+# =====================================================
+# MAIN TITLE
+# =====================================================
+
+st.title("🩺 Medical AI Assistant")
+
+st.write(
+    "An AI-powered assistant with a dynamically expanding "
+    "knowledge base."
 )
 
 
-# ============================================================
-# MULTIMODAL ASSISTANT
-# ============================================================
+# =====================================================
+# 1. MEDICAL ASSISTANT
+# =====================================================
 
-if assistant == "🖼️ Multimodal Assistant":
+if assistant_mode == "🩺 Medical Assistant":
 
-    st.subheader("🖼️ Multimodal AI Assistant")
+    st.header("🩺 Dynamic Medical Q&A Chatbot")
 
-    uploaded_file = st.file_uploader(
-        "Upload an Image",
-        type=["png", "jpg", "jpeg"]
+    st.write(
+        "Ask a medical question. The chatbot searches the "
+        "dynamically updated vector database."
     )
-
-
-    question = st.text_input(
-        "Ask a question about the image"
-    )
-
-
-    if uploaded_file:
-
-        st.image(
-            uploaded_file,
-            caption="Uploaded Image",
-            use_container_width=True
-        )
-
-
-    if st.button("Analyze Image"):
-
-        result = analyze_image(
-            uploaded_file,
-            question
-        )
-
-        translated_result = translate_text(
-            result,
-            language
-        )
-
-        st.success(translated_result)
-
-
-
-# ============================================================
-# RESEARCH ASSISTANT
-# ============================================================
-
-elif assistant == "📚 Research Assistant":
-
-    st.subheader("📚 Domain Expert Research Assistant")
-
-
-    user_question = st.text_input(
-        "Enter your research question:"
-    )
-
-
-    if user_question:
-
-
-        result = search_paper(
-            user_question
-        )
-
-
-        translated_result = translate_text(
-            result,
-            language
-        )
-
-
-        st.write(
-            translated_result
-        )
-
-
-
-# ============================================================
-# MEDICAL ASSISTANT
-# ============================================================
-
-else:
-
-
-    st.subheader("🩺 Medical Q&A Assistant")
-
 
     user_question = st.text_input(
         "Enter your medical question:"
     )
 
+    if st.button("🔍 Get Medical Answer"):
 
-    if user_question:
+        if user_question.strip():
 
-
-        # -----------------------------
-        # Sentiment Analysis
-        # -----------------------------
-
-        sentiment = analyze_sentiment(
-            user_question
-        )
-
-
-        st.subheader(
-            "😊 Sentiment Analysis"
-        )
-
-
-        st.write(
-            translate_text(
-                sentiment,
-                language
-            )
-        )
-
-
-        if "Negative" in sentiment:
-
-            st.warning(
-                "I'm sorry you are feeling worried. I will try my best to help."
+            # Search the dynamic vector database
+            answer = get_dynamic_answer(
+                user_question
             )
 
+            st.subheader("💡 Answer")
 
-        elif "Positive" in sentiment:
+            st.write(answer)
 
-            st.success(
-                "Glad to hear you are feeling positive!"
-            )
+            # -----------------------------
+            # Medical Entity Recognition
+            # -----------------------------
 
+            try:
+
+                entities = recognize_entities(
+                    user_question
+                )
+
+                if entities:
+
+                    st.subheader(
+                        "🔎 Detected Medical Entities"
+                    )
+
+                    st.write(entities)
+
+            except Exception as error:
+
+                st.warning(
+                    f"Entity recognition unavailable: {error}"
+                )
+
+            # -----------------------------
+            # Sentiment Analysis
+            # -----------------------------
+
+            try:
+
+                sentiment_result = analyze_sentiment(
+                    user_question
+                )
+
+                st.subheader(
+                    "😊 Question Sentiment"
+                )
+
+                st.write(sentiment_result)
+
+            except Exception as error:
+
+                st.warning(
+                    f"Sentiment analysis unavailable: {error}"
+                )
 
         else:
 
-            st.info(
-                "Let's understand your medical question."
+            st.warning(
+                "Please enter a medical question."
             )
 
 
+# =====================================================
+# 2. RESEARCH ASSISTANT
+# =====================================================
 
-        # -----------------------------
-        # Entity Recognition
-        # -----------------------------
+elif assistant_mode == "📚 Research Assistant":
 
-        entities = recognize_entities(
-            user_question
-        )
+    st.header("📚 Scientific Research Assistant")
 
+    st.write(
+        "Search for scientific research information."
+    )
 
-        st.subheader(
-            "🔍 Detected Medical Entities"
-        )
+    research_question = st.text_input(
+        "Enter your research topic:"
+    )
 
+    if st.button("🔍 Search Research Papers"):
 
-        found = False
+        if research_question.strip():
 
+            try:
 
-        if entities["Diseases"]:
+                result = search_paper(
+                    research_question
+                )
 
-            found = True
+                st.subheader(
+                    "📄 Research Results"
+                )
 
-            st.write(
-                "🦠 Detected Diseases:"
+                st.write(result)
+
+            except Exception as error:
+
+                st.error(
+                    f"Research search failed: {error}"
+                )
+
+        else:
+
+            st.warning(
+                "Please enter a research topic."
             )
 
-            for disease in entities["Diseases"]:
 
-                st.write(
-                    f"• {disease}"
+# =====================================================
+# 3. MULTIMODAL ASSISTANT
+# =====================================================
+
+elif assistant_mode == "🖼️ Multimodal Assistant":
+
+    st.header("🖼️ Multimodal Medical Assistant")
+
+    st.write(
+        "Upload an image for analysis."
+    )
+
+    uploaded_image = st.file_uploader(
+        "Upload a medical image:",
+        type=[
+            "jpg",
+            "jpeg",
+            "png"
+        ]
+    )
+
+    if uploaded_image is not None:
+
+        st.image(
+            uploaded_image,
+            caption="Uploaded Medical Image",
+            use_container_width=True
+        )
+
+        if st.button("🔍 Analyze Image"):
+
+            try:
+
+                result = analyze_image(
+                    uploaded_image
+                )
+
+                st.subheader(
+                    "🧠 Image Analysis"
+                )
+
+                st.write(result)
+
+            except Exception as error:
+
+                st.error(
+                    f"Image analysis failed: {error}"
                 )
 
 
+# =====================================================
+# DISCLAIMER
+# =====================================================
 
-        if entities["Symptoms"]:
+st.sidebar.markdown("---")
 
-            found = True
-
-            st.write(
-                "🤒 Detected Symptoms:"
-            )
-
-            for symptom in entities["Symptoms"]:
-
-                st.write(
-                    f"• {symptom}"
-                )
-
-
-
-        if entities["Medicines"]:
-
-            found = True
-
-            st.write(
-                "💊 Detected Medicines:"
-            )
-
-            for medicine in entities["Medicines"]:
-
-                st.write(
-                    f"• {medicine}"
-                )
-
-
-
-        if entities["Treatments"]:
-
-            found = True
-
-            st.write(
-                "🏥 Detected Treatments:"
-            )
-
-            for treatment in entities["Treatments"]:
-
-                st.write(
-                    f"• {treatment}"
-                )
-
-
-
-        if not found:
-
-            st.info(
-                "No medical entities detected."
-            )
-
-
-
-        # -----------------------------
-        # Medical Answer
-        # -----------------------------
-
-        st.subheader(
-            "💬 Medical Answer"
-        )
-
-
-        answer = get_answer(
-            user_question
-        )
-
-
-        translated_answer = translate_text(
-            answer,
-            language
-        )
-
-
-        st.write(
-            translated_answer
-        )
-
-
-
-# -----------------------------
-# Footer
-# -----------------------------
-
-st.markdown("---")
-
-
-st.caption(
-    "Medical Q&A | TF-IDF | Cosine Similarity | "
-    "Entity Recognition | Sentiment Analysis | "
-    "Research Search | Image Upload | "
-    "Multilingual Translation"
+st.sidebar.warning(
+    "⚠️ This chatbot is for educational and informational "
+    "purposes only. It is not a substitute for professional "
+    "medical advice."
 )

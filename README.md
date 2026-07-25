@@ -1,48 +1,66 @@
-# AI Medical & Research Assistant
+## 🔄 Dynamic Knowledge Base
 
-## Features
+The Medical AI Assistant uses a dynamic knowledge-base system that allows new medical information to be incorporated into the chatbot over time without retraining the complete machine-learning model.
 
-✔ Medical Question Answering  
-✔ TF-IDF Retrieval  
-✔ Cosine Similarity  
-✔ Medical Entity Recognition  
-✔ Sentiment Analysis  
-✔ Dynamic Knowledge Base Update  
-✔ Research Paper Assistant  
-✔ Image Upload Assistant  
-✔ Multilingual Support  
+### Workflow
 
-## Technologies Used
+New Medical Information
+        ↓
+new_questions.csv
+        ↓
+scheduler.py
+        ↓
+knowledge_updater.py
+        ↓
+Duplicate Detection
+        ↓
+Sentence Embeddings
+        ↓
+ChromaDB Vector Database
+        ↓
+Semantic Search
+        ↓
+Dynamic Medical Chatbot
+        ↓
+Updated Medical Response
 
-- Python
-- Streamlit
-- Pandas
-- Scikit-learn
-- spaCy
-- TextBlob
-- Deep Translator
+### Components
 
-## How to Run
+- `new_questions.csv` — Stores newly added medical question-answer pairs.
+- `knowledge_updater.py` — Reads new information and adds it to the vector database.
+- `scheduler.py` — Periodically checks for new medical information.
+- ChromaDB — Stores medical knowledge as vector embeddings.
+- `dynamic_chatbot.py` — Performs semantic search and retrieves relevant answers.
+- `app.py` — Provides the Streamlit user interface.
 
-Install dependencies:
+### Duplicate Prevention
 
-pip install -r requirements.txt
+The system checks whether a question already exists in the vector database. Existing questions are skipped, preventing duplicate knowledge from being added.
 
-Run:
+### Testing Result
 
-streamlit run app.py
+A new question was added:
 
+**Question:** What is migraine?
 
-## Internship Tasks Completed
+The system successfully:
 
-Task 1: Medical Entity Recognition
+1. Detected the new question.
+2. Added it to the vector database.
+3. Increased the total document count.
+4. Retrieved the information through the chatbot.
+5. Returned the correct answer to the user.
 
-Task 2: Dynamic Knowledge Base
+### Example Result
 
-Task 3: Sentiment Analysis
+**User Question:**
 
-Task 4: Domain Expert Chatbot
+What is migraine?
 
-Task 5: Multimodal Assistant
+**Chatbot Answer:**
 
-Task 6: Multilingual Chatbot
+Migraine is a neurological condition that can cause severe headache and other symptoms.
+
+### Outcome
+
+The dynamic knowledge-base system successfully enables the chatbot to incorporate new medical information over time without requiring complete model retraining.
