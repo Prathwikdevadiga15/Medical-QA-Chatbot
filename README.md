@@ -64,3 +64,15 @@ Migraine is a neurological condition that can cause severe headache and other sy
 ### Outcome
 
 The dynamic knowledge-base system successfully enables the chatbot to incorporate new medical information over time without requiring complete model retraining.
+Task 2 – Medical Q&A Chatbot
+✓ MedQuAD Dataset
+✓ TF-IDF Retrieval
+✓ Medical Entity Recognition
+✓ Streamlit Interface
+
+Task 3 – Dynamic Knowledge Base
+✓ Extends Task 2
+✓ Automatic Knowledge Updates
+✓ Scheduler
+✓ Vector Database Update
+✓ New Questions Added Without Retraining
