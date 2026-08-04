@@ -1,78 +1,160 @@
-## 🔄 Dynamic Knowledge Base
+# 🏥 Medical Q&A Chatbot
 
-The Medical AI Assistant uses a dynamic knowledge-base system that allows new medical information to be incorporated into the chatbot over time without retraining the complete machine-learning model.
+## 📌 Overview
 
-### Workflow
+The **Medical Q&A Chatbot** is a specialized healthcare assistant built using **Python, Streamlit, and the MedQuAD dataset**. It helps users find answers to medical questions by retrieving the most relevant information from a structured medical knowledge base.
 
-New Medical Information
-        ↓
-new_questions.csv
-        ↓
-scheduler.py
-        ↓
-knowledge_updater.py
-        ↓
-Duplicate Detection
-        ↓
-Sentence Embeddings
-        ↓
-ChromaDB Vector Database
-        ↓
-Semantic Search
-        ↓
-Dynamic Medical Chatbot
-        ↓
-Updated Medical Response
+The chatbot uses **TF-IDF retrieval** to identify the most relevant medical question-answer pairs and **Medical Entity Recognition (NER)** to extract important medical terms such as symptoms, diseases, treatments, and medicines from user queries.
 
-### Components
+---
 
-- `new_questions.csv` — Stores newly added medical question-answer pairs.
-- `knowledge_updater.py` — Reads new information and adds it to the vector database.
-- `scheduler.py` — Periodically checks for new medical information.
-- ChromaDB — Stores medical knowledge as vector embeddings.
-- `dynamic_chatbot.py` — Performs semantic search and retrieves relevant answers.
-- `app.py` — Provides the Streamlit user interface.
+## 🚀 Features
 
-### Duplicate Prevention
+- 🏥 Medical Question Answering
+- 📚 MedQuAD Dataset Integration
+- 🔍 TF-IDF Based Information Retrieval
+- 🧬 Medical Entity Recognition (NER)
+- 💊 Identification of Symptoms, Diseases, Treatments, and Medicines
+- 🎨 Interactive Streamlit Web Interface
+- ⚡ Fast and Accurate Medical Answer Retrieval
 
-The system checks whether a question already exists in the vector database. Existing questions are skipped, preventing duplicate knowledge from being added.
+---
 
-### Testing Result
+## 🛠 Technologies Used
 
-A new question was added:
+- Python
+- Streamlit
+- Scikit-learn
+- Pandas
+- spaCy
+- TF-IDF Vectorizer
+- NumPy
 
-**Question:** What is migraine?
+---
 
-The system successfully:
+## 📂 Project Structure
 
-1. Detected the new question.
-2. Added it to the vector database.
-3. Increased the total document count.
-4. Retrieved the information through the chatbot.
-5. Returned the correct answer to the user.
+```
+Medical-QA-Chatbot/
+│
+├── app.py
+├── chatbot.py
+├── entity_recognition.py
+├── summarizer.py
+├── requirements.txt
+├── README.md
+├── models/
+│   ├── medical_model.pkl
+│   └── tfidf_vectorizer.pkl
+├── data/
+│   └── MedQuAD.csv
+└── report/
+    └── Medical_QA_Report.pdf
+```
 
-### Example Result
+---
 
-**User Question:**
+## ⚙️ Installation
 
-What is migraine?
+### Clone the repository
 
-**Chatbot Answer:**
+```bash
+git clone https://github.com/Prathwikdevadiga15/Medical-QA-Chatbot.git
+```
 
-Migraine is a neurological condition that can cause severe headache and other symptoms.
+### Move into the project directory
 
-### Outcome
+```bash
+cd Medical-QA-Chatbot
+```
 
-The dynamic knowledge-base system successfully enables the chatbot to incorporate new medical information over time without requiring complete model retraining.
-Task 2 – Medical Q&A Chatbot
-✓ MedQuAD Dataset
-✓ TF-IDF Retrieval
-✓ Medical Entity Recognition
-✓ Streamlit Interface
+### Install dependencies
 
-Task 3 – Dynamic Knowledge Base
-✓ Extends Task 2
-✓ Automatic Knowledge Updates
-✓ Scheduler
-✓ Vector Database Update
-✓ New Questions Added Without Retraining
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Run the Application
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📖 How It Works
+
+1. The user enters a medical question.
+2. The chatbot preprocesses the input.
+3. TF-IDF converts the question into numerical features.
+4. Cosine similarity retrieves the most relevant question from the MedQuAD dataset.
+5. Medical Entity Recognition identifies symptoms, diseases, treatments, and medicines.
+6. The chatbot displays the most relevant medical answer through the Streamlit interface.
+
+---
+
+## 📚 Dataset
+
+This project uses the **MedQuAD (Medical Question Answer Answering Dataset)**, which contains thousands of medically reviewed question-answer pairs collected from trusted healthcare organizations, including:
+
+- ADAM
+- Cancer.gov
+- NIDDK
+- Drugs
+- NHLBI
+- MedlinePlus
+
+The dataset enables the chatbot to retrieve reliable answers for a wide range of medical queries.
+
+---
+
+## 🧪 Example
+
+### User Question
+
+**What are the symptoms of diabetes?**
+
+### Medical Entities Detected
+
+- Disease: Diabetes
+- Symptoms
+
+### Chatbot Response
+
+Common symptoms of diabetes include increased thirst, frequent urination, fatigue, blurred vision, unexplained weight loss, and slow wound healing.
+
+---
+
+## 🎯 Assignment Objectives Achieved
+
+### Task 2 – Medical Q&A Chatbot
+
+- ✅ MedQuAD Dataset Integration
+- ✅ TF-IDF Retrieval Mechanism
+- ✅ Medical Entity Recognition
+- ✅ Medical Question Answering
+- ✅ Streamlit Web Interface
+
+---
+
+## 🔮 Future Improvements
+
+- Voice-based medical assistant
+- Multilingual support
+- Retrieval-Augmented Generation (RAG)
+- Integration with latest medical databases
+- Medical document question answering
+
+---
+
+## 👨‍💻 Author
+
+**Prathwik H Devadiga**
+
+GitHub: https://github.com/Prathwikdevadiga15
+
+---
+
+⭐ If you found this project useful, consider giving it a star.
